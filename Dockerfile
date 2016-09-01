@@ -5,8 +5,8 @@
 #
 #
 
-FROM		ubuntu:12.10
-MAINTAINER	Guillaume J. Charmes <guillaume@charmes.net>
+FROM		ubuntu:latest
+MAINTAINER	Tommy Ch. Lehmann <lehmann@tommy-lehmann.de>
 
 RUN		apt-get update -qq
 
@@ -14,12 +14,13 @@ RUN		apt-get install -qqy automake
 RUN		apt-get install -qqy libcurl4-openssl-dev
 RUN		apt-get install -qqy git
 RUN		apt-get install -qqy make
+RUN		apt-get install -qqy gcc
 
-RUN		git clone https://github.com/pooler/cpuminer
+RUN		git clone https://github.com/wolf9466/cpuminer-multi.git
 
-RUN		cd cpuminer && ./autogen.sh
-RUN		cd cpuminer && ./configure CFLAGS="-O3"
-RUN		cd cpuminer && make
+RUN		cd cpuminer-multi && ./autogen.sh
+RUN		cd cpuminer-multi && ./configure CFLAGS="-O3" 
+RUN		cd cpuminer-multi && make
 
-WORKDIR		/cpuminer
+WORKDIR		/cpuminer-multi
 ENTRYPOINT	["./minerd"]
